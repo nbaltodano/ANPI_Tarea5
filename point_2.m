@@ -41,12 +41,12 @@ RKX0(2)=5;      #y0
 RKTF=200;
 
 RKTSPAN=[0 RKTF]; 
-RKFG=@(RKT,RKX) [100- RKX(2)];         #f(t,x)
+RKFG=@(RKT,RKX) [100- RKX];         #f(t,x)
 tic();
-[RKT,RKX]=ode45(RKFG,RKTSPAN,RKX0);    #Find the solution of the ecuation.
+[RKT,RKX]=RungeKutta4(RKFG,RKTSPAN(1), RKTSPAN(2),RKX0, 0.2);    #Find the solution of the ecuation.
 timeRK4 = toc();
-
-plot(t,x(:,2),'r',T,X(:,2),'g',RKT,RKX(:,2),'b')#Plot the solution.
+RKT = [0:0.2:200.2];
+plot(t,x(:,2),'r',T,X(:,2),'g',RKT,RKX.','b')#Plot the solution.
 xlabel('t')
 ylabel('y');
 title('dy/dt=100-y')
